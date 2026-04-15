@@ -1,0 +1,16 @@
+{
+  "_comment": "Minimal hook registration for 1pct-moves-only. Merge the `hooks.Stop` block into your ~/.claude/settings.json. The hook is NON-BLOCKING by default (logs to ~/.claude/logs/1pct-violations.log). Set ONE_PCT_STRICT=1 in your shell env to enable blocking mode.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/skills/1pct-moves-only/hooks/1pct-check.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
