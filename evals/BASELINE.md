@@ -25,10 +25,14 @@ npx promptfoo eval -c evals/promptfooconfig.yaml
 - "Suggested next:" — rarer but high-friction when it appears
 
 ### Eval pass rate
-Promptfoo run requires `ANTHROPIC_API_KEY`. Run on demand (~$0.05/run on Sonnet):
+
+**2026-04-14 attempt: BLOCKED — Anthropic API credit balance depleted.** Re-run when credits top up. Command:
+
 ```bash
-ANTHROPIC_API_KEY=$your_key npx promptfoo eval -c evals/promptfooconfig.yaml
+npx promptfoo eval -c evals/promptfooconfig.yaml
 ```
+
+The harness, scenarios, and assertions are in place; only the LLM provider call is gated. Estimated cost when unblocked: ~$0.05/run on Sonnet. This eval is the load-bearing missing piece — until it runs, the pass-rate column above is unverified.
 
 ## Metrics defined
 
