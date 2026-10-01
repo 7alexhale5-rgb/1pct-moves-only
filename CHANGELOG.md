@@ -2,6 +2,11 @@
 
 All notable changes to the 1pct-moves-only skill.
 
+## [3.1.0] — 2026-10-01 — Research delegation for external unknowns
+
+### Added
+- **External unknowns go to research** in `SKILL.md` "Delegate, don't ask" — when a narrow fact outside the repo (library choice, API limit, CVE status, a standard's current version) blocks an approved plan, dispatch `/research-stack --no-ask --focus <tag>` as a background research subagent (inline when no subagents exist) and keep executing the unblocked steps. Three tag examples: `devtools`, `security`, `a11y`. Research resolves facts, not decisions the user owns; a result that changes the approved plan's scope is a stop sign.
+
 ## [3.0.0] — 2026-04-14 — Enforcement + measurement + composition
 
 ### Added
