@@ -6,6 +6,8 @@ All notable changes to the 1pct-moves-only skill.
 
 ### Added
 - **External unknowns go to research** in `SKILL.md` "Delegate, don't ask" — when a narrow fact outside the repo (library choice, API limit, CVE status, a standard's current version) blocks an approved plan, dispatch `/research-stack --no-ask --focus <tag>` as a background research subagent (inline when no subagents exist) and keep executing the unblocked steps. Three tag examples: `devtools`, `security`, `a11y`. Research resolves facts, not decisions the user owns; a result that changes the approved plan's scope is a stop sign.
+- `/research-stack` row in the skill-friends table; the three tags are marked as examples with a pointer to research-stack `focus/tags.json`.
+- Eval scenario 11: an external CVE question must go to research, not to the user. The shared system prompt states the rule.
 
 ## [3.0.0] — 2026-04-14 — Enforcement + measurement + composition
 

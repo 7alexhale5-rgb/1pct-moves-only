@@ -45,7 +45,7 @@ Stop hook that scans the last assistant message after each turn for red-flag pat
 Code-fenced and inline-code blocks are excluded so the skill can quote its own banned phrases (e.g. in rationalization tables) without self-flagging.
 
 ### 3. Measurement (`evals/`, `bin/audit-sessions.sh`)
-- **Promptfoo regression suite** (10 scenarios) covering phase transitions, deviation paths, stop signs, context-bracket non-events, approval expiration, long-horizon drift, scope ambiguity. Run with `npx promptfoo eval`.
+- **Promptfoo regression suite** (11 scenarios) covering phase transitions, deviation paths, stop signs, context-bracket non-events, approval expiration, long-horizon drift, scope ambiguity. Run with `npx promptfoo eval`.
 - **Transcript audit** greps your historical Claude Code sessions for red-flag patterns AND Anthropic's frustration-detection regex (per the [2026-03-31 source leak](https://alex000kim.com/posts/2026-03-31-claude-code-source-leak/)). TSV out, summary line.
 - **Test suite** (20 unit + integration) covers the hook contract end-to-end.
 
@@ -86,7 +86,7 @@ Emits `1PCT` badge when the companion memory marker exists — a visible signal 
 
 - [obra/superpowers](https://github.com/obra/superpowers) — `using-superpowers` and `executing-plans` are upstream complements. This skill activates after their planning gates close.
 - Native Claude Code skill system (post 2025-10).
-- Skill-friends section in `SKILL.md` documents explicit composition with `/planning-stack`, `/build-stack`, `/review-stack`, `/commit`, `/ship`, `/closeout-stack`.
+- Skill-friends section in `SKILL.md` documents explicit composition with `/planning-stack`, `/build-stack`, `/review-stack`, `/commit`, `/ship`, `/closeout-stack`, `/research-stack`.
 
 ## Not for
 
