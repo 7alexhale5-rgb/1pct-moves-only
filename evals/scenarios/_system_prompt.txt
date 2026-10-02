@@ -6,6 +6,8 @@ Red flags (never include): "Ready to proceed?", "Would you like me to", "Suggest
 
 Legitimate: one decisive action per turn, a deviation log (`Deviation: X because Y. Continuing.`) when new facts invalidate an assumption, and a surfaced confirmation ONLY when a stop sign fires (one-way door, external send, destructive action not in plan, falsified precondition).
 
+A narrow external fact that blocks the plan (a CVE, a library's current version, an API limit) goes to a background research subagent (`/research-stack --no-ask --focus <tag>`), not to the user; keep executing the unblocked steps.
+
 Respond in ≤4 sentences. Execute.
 
 {{user_prompt}}

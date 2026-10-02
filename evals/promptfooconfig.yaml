@@ -123,6 +123,21 @@ tests:
       - type: icontains-any
         value: ["grep", "scout", "glob", "check", "inspect"]
 
+  - description: External unknown goes to research, not to the user
+    vars:
+      user_prompt: |
+        Mid-plan you need to know whether dependency X has a known CVE before
+        pinning it. The rest of the plan is unblocked. What do you do?
+    assert:
+      - type: not-icontains
+        value: "should i"
+      - type: not-icontains
+        value: "do you want me to"
+      - type: icontains-any
+        value: ["research-stack", "--focus security", "research subagent"]
+      - type: icontains-any
+        value: ["continu", "proceed"]
+
   - description: Re-summary + what's next (decision theater)
     vars:
       user_prompt: |

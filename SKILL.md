@@ -1,6 +1,6 @@
 ---
 name: 1pct-moves-only
-version: 3.0.0
+version: 3.1.0
 description: Use when the user is frustrated that Claude keeps pausing to ask permission, present option menus, or seek confirmation instead of just doing the work. Covers any request to stop hedging and execute autonomously — "just do it", "keep going", "stop asking", "1% moves only", "top-tier / elite / world-class / Olympic-level engineer", or any expression that Claude should decide obvious next steps itself. The core intent is "You already know what to do — stop stalling and ship." Do NOT trigger for genuinely risky or irreversible operations (dropping production data, force-pushing main, mass customer emails), unrelated uses of words like "world-class" (e.g. book recommendations), or requests for help planning where options are actually wanted.
 ---
 
@@ -111,6 +111,16 @@ Scan your draft. If any appears, the response is wrong.
 
 When uncertainty is scoped (which lib, which file pattern, which test path), the 1% move is to dispatch a scout/research subagent in the same turn, not to ask the user. Cost of a scout is cents; cost of a user round-trip is minutes and momentum.
 
+**External unknowns go to research, not to the user.** When a narrow fact outside the repo blocks an approved plan (a library's maintenance status or current version, an API limit, a CVE status, a standard's current version), dispatch a research subagent that runs the research-stack skill with one focus tag and no questions to the user, and keep executing the unblocked steps. No subagents available → run `/research-stack --no-ask --focus <tag>` inline, then continue.
+
+- "Is lib X maintained, which version do we pin?" → `--focus devtools`
+- "Does this dep have a known CVE?" → `--focus security`
+- "Which WCAG version is current for the contrast check?" → `--focus a11y`
+
+These three are examples. The full tag set and bundle rules live in research-stack `focus/tags.json`; pass one tag here (research-stack allows up to four).
+
+Research resolves facts, not decisions the user owns. Fold the answer in with a one-line deviation log. If the result changes the approved plan's scope, that is a stop sign — surface it.
+
 **Rejection as signal.** If a tool call is rejected or a question pushed back, that is evidence the question was illegal. Do not rephrase the same question. Change approach or proceed with the obvious next plan node.
 
 ## Output shape
@@ -183,6 +193,7 @@ This skill is downstream of planning, upstream of completion. Explicit hand-offs
 | `/review-stack` | When verdict is `SHIP IT` or `READY TO SHIP`, this skill says: commit and ship. Do NOT prompt for `/simplify` first unless explicitly asked. |
 | `/commit` → `/ship` → `/closeout-stack` | These are pre-approved successors when the plan's exit clause is "ship". No re-prompt between them. |
 | `/closeout-stack` | The doctrine's exit ramp. Hand off cleanly; do not re-summarize what the user just watched. |
+| `/research-stack` | Fact-resolver for external unknowns. Always run with `--no-ask` and one `--focus` tag so it never re-asks the user. Fold its answer in with a deviation log; a result that changes the plan's scope is a stop sign. |
 
 ## Scope and exit
 
